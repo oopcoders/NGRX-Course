@@ -1,0 +1,4 @@
+<div class="shopping-cart-link-container" *ngIf="cart$ | async as cart">
+	<span class="badge badge-warning" *ngIf="cart.products">{{cart.products.length}}</span>
+	<a class="nav-link" [routerLink]="['/shopping/cart']"><i class="fas fa-shopping-cart"></i> Shopping Cart</a>
+</div>

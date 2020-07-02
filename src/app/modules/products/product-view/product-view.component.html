@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+	<div class="col-8 mt-4" *ngIf="product">
+		<h4>Product Detail</h4>
+		<div class="row mt-4">
+			<div class="col-md-5 col-lg-7">
+				<img class="card-img-top" src="{{product.imageUrl}}" alt="Card image cap">
+				<div class=" mt-4">
+					<div>
+						<p>Price: ${{product.price}}</p>
+					</div>
+					<div>
+						<p>
+							In Stock: {{product.quantity}}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7 col-lg-5">
+				<div class="card-body">
+					<h5 class="card-title">{{product.name}}</h5>
+					<p class="card-text">{{product.description}}
+					</p>
+				</div>
+				<div class="text-center">
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<app-cart-button-widget [product]="product" [text]="'Shopping Cart'"></app-cart-button-widget>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-4">
+			<button class="btn btn-primary" [routerLink]="['/shopping/products']" routerLinkActive="router-link-active"><i
+				   class="fas fa-arrow-left"></i>
+				Back To Shopping</button>
+		</div>
+	</div>
+
+</div>

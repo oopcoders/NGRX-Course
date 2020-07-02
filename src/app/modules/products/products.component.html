@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+	<div class="filter col-3  mt-4">
+		<p>Filter Products by:</p>
+		<app-price-filter-widget (selectedRadioEvent)="onPriceFilterChange($event)"></app-price-filter-widget>
+	</div>
+	<div class="col-9 mt-4">
+		<h4>Products</h4>
+
+		<div class="row">
+
+			<div class="col-lg-4 col-md-6 mt-3" *ngFor="let product of products">
+				<div class="card">
+					<img src="{{product.imageUrl}}" class="card-img-top" alt="Product Image">
+					<div class="card-body">
+						<h6 class="card-title">{{product.name}}</h6>
+						<p class="card-text">Price : ${{product.price}}</p>
+						<p class="card-text">Quantity : {{product.quantity}}</p>
+					</div>
+					<div class="text-center mb-1">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-info" [routerLink]="['/shopping/product-view', product.id]"
+									title="View Product Details"><i class="fas fa-search"></i> View</button>
+							<app-cart-button-widget [product]="product" [text]="'Cart'"></app-cart-button-widget>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class=" mb-1 mt-5 col-5 offset-7">
+				<app-pagination-buttons-widget [pagination]="pagination" (selecedUrl)="onPaginationChange($event);">
+				</app-pagination-buttons-widget>
+			</div>
+		</div>
+
+	</div>
+</div>

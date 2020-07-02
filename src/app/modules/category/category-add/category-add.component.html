@@ -1,0 +1,20 @@
+<div class="row justify-content-center">
+	<div class="col-8 mt-4">
+		<h4>Add Category</h4>
+		<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+			<div class="form-group">
+				<label for="categoryName">Category Name</label>
+				<input type="text" ngModel required name="name" class="form-control" id="categoryName" placeholder="Name">
+			</div>
+			<div class="mb-3 form-group">
+				<label for="categoryDescription">Description</label>
+				<textarea class="form-control" ngModel name="description" class="form-control" id="categoryDescription"
+						  placeholder="Category Description"></textarea>
+			</div>
+
+			<button class="btn btn-primary m-1" [routerLink]="['/category/list']"><i class="fas fa-arrow-left"></i> Back To List</button>
+			<button class="btn btn-success m-1" type="submit" [disabled]="f.invalid">Add Category <i class="fas fa-plus"></i></button>
+		</form>
+
+	</div>
+</div>

@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootswatch/dist/cosmo/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/cosmo/bootswatch";
+
+/*****************************************************************************/
+/*footer*/
+/*****************************************************************************/
+
+.success {
+  background-color: $success !important;
+}
+.info {
+  background-color: $info !important;
+}
+.danger {
+  background-color: $danger !important;
+}
+.warning {
+  background-color: $warning !important;
+}
+.footer {
+  p {
+    padding: 10px 0px;
+  }
+}

@@ -1,0 +1,11 @@
+<div class="btn-group text-center" role="group" aria-label="Pagination">
+	<button type="button" class="btn btn-secondary" title="First" (click)="paginationChangeEmit(pagination.first)" *ngIf="pagination?.first"><i
+		   class="fas fa-angle-double-left"></i> First</button>
+	<button type="button" class="btn btn-secondary" title="Previous" (click)="paginationChangeEmit(pagination.prev)" *ngIf="pagination?.prev"><i
+		   class="fas fa-chevron-left"></i>
+		Previous</button>
+	<button type="button" class="btn btn-secondary" title="Next" (click)="paginationChangeEmit(pagination.next)" *ngIf="pagination?.next">Next <i
+		   class="fas fa-chevron-right"></i></button>
+	<button type="button" class="btn btn-secondary" title="Last" (click)="paginationChangeEmit(pagination.last)" *ngIf="pagination?.last">Last <i
+		   class="fas fa-angle-double-right"></i></button>
+</div>

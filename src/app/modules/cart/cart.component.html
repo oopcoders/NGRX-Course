@@ -1,0 +1,56 @@
+<div class="cart-list" *ngIf="cart$ | async as cart">
+	<h3 class="row mt-4 mb-4">Shopping Cart</h3>
+
+
+
+	<div class="row" *ngIf="cart.isCartEmpty; else showTableBlock">
+		<div class="col-6 offset-3 text-center">
+			<div class="empty-cart-list-icon"><i class="fas fa-box-open"></i></div>
+			<div class="empty-cart-list-container">
+				<p>Shopping Cart Is Empty</p>
+				<p>Look for the add shopping cart button to save to the cart list while you shop.</p>
+				<a class="btn btn-info mb-5" [routerLink]="['/shopping/products']"><i class="fas fa-store-alt"></i> Start Shopping</a>
+			</div>
+		</div>
+	</div>
+	<ng-template #showTableBlock>
+		<div class="row">
+			<table class="table table-hover text-center">
+
+				<thead>
+					<tr>
+						<th scope="col">Image</th>
+						<th scope="col">Name</th>
+						<th scope="col">Price</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let product of cart.products">
+						<th scope="row"><span class="cart-list-image"><img src="{{product.imageUrl}}"></span></th>
+						<td>{{product.name}}</td>
+						<td>{{product.price}}</td>
+						<td>
+							<app-cart-button-widget [product]="product" [text]="'Remove From Shopping Cart'"></app-cart-button-widget>
+						</td>
+					</tr>
+
+				</tbody>
+				<tfoot>
+
+					<tr>
+						<th scope="row"></th>
+						<td>Total Items : {{cart.cartItemsLength}}</td>
+						<td>Sub Total: ${{cart.productsSubtotal}}</td>
+					</tr>
+
+				</tfoot>
+
+			</table>
+
+		</div>
+	</ng-template>
+
+
+
+</div>

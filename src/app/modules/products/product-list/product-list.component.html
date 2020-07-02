@@ -1,0 +1,45 @@
+<div class="product-list">
+	<h3 class="mt-4 mb-4">Product List</h3>
+
+	<table class="table table-hover text-center">
+
+		<thead>
+			<tr>
+				<th scope="col">Product Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">quantity</th>
+				<th scope="col">
+					<div>
+						<button type="button" title="Add new product" class="btn btn-success" [routerLink]="['/shopping/product-add']">Add New Product
+							<i class="fas fa-plus"></i></button>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr *ngFor="let product of products">
+				<th scope="row">{{product.name}}</th>
+				<td>${{product.price}}</td>
+				<td>{{product.quantity}}</td>
+				<td>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-info" title="View Product"><i class="fas fa-search"
+							   [routerLink]="['/shopping/product-item', product.id]"></i></button>
+						<button type="button" class="btn btn-warning" title="Edit Product" [routerLink]="['/shopping/product-edit', product.id]"><i
+							   class="fas fa-edit"></i></button>
+						<button type="button" class="btn btn-danger" title="Delete Product" (click)="deleteProduct(product.id)"><i class="fa fa-trash"
+							   aria-hidden="true"></i></button>
+					</div>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+	<div class="row">
+		<div class=" mb-1 mt-5 col-5 offset-7">
+			<app-pagination-buttons-widget [pagination]="pagination" (selecedUrl)="onPaginationChange($event);">
+			</app-pagination-buttons-widget>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+	<div class="col-8 mt-4">
+		<h4>Edit Product</h4>
+		<form #f="ngForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="productName">Product Name</label>
+				<input type="text" class="form-control" name="name" required [(ngModel)]="model.name" id="productName" placeholder="Name">
+			</div>
+			<div class="mb-3 form-group">
+				<label for="productDescription">Description</label>
+				<textarea class="form-control" id="productDescription" name="description" required [(ngModel)]="model.description"
+						  placeholder="Product Description"></textarea>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="productPrice">Price</label>
+					<input type="text" class="form-control" name="price" required [(ngModel)]="model.price" id="productPrice"
+						   placeholder="Example: 000.00">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="productQuantity">Quantity</label>
+					<input type="number" class="form-control" name="quantity" required [(ngModel)]="model.quantity" id="productQuantity"
+						   placeholder="Example: 100">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="productImageUrl">Image Url</label>
+				<input type="text" class="form-control" id="productImageUrl" required name="imageUrl" [(ngModel)]="model.imageUrl"
+					   placeholder="Example: https://source.unsplash.com/1600x900/?product">
+			</div>
+			<button class="btn btn-primary m-1" [routerLink]="['/shopping/product-list']" type="submit"><i class="fas fa-arrow-left"></i> Back To
+				List</button>
+			<button class="btn btn-warning m-1" type="submit" [disabled]="f.invalid">Edit Product <i class="fas fa-edit"></i></button>
+		</form>
+
+	</div>
+</div>

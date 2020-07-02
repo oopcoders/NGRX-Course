@@ -1,0 +1,37 @@
+<div class="row justify-content-center" *ngIf="categories$ | async as categories">
+	<div class="col-8 mt-4">
+		<h4>Categories</h4>
+		<div class="text-right">
+			<button type="button" class="btn btn-success" [routerLink]="['/category/add']">Add New Product <i class="fas fa-plus"></i></button>
+		</div>
+
+		<div class="row">
+
+			<div class="col-lg-4 col-md-6 mt-3" *ngFor="let category of categories">
+				<div class="card">
+					<div class="card-body">
+						<h6 class="card-title">{{category.name}}</h6>
+						<p class="card-text">Descripion : {{category.description}}</p>
+
+					</div>
+					<div class="text-center mb-1">
+						<div class="btn-group">
+							<button type="button" class="btn btn-info" [routerLink]="['/category/item', category.id]"><i
+								   class="fas fa-search"></i></button>
+							<button type="button" class="btn btn-warning" [routerLink]="['/category/edit', category.id]"><i
+								   class="fas fa-edit"></i></button>
+							<button type="button" class="btn btn-danger" (click)="deleteCategory(category.id)"><i class="fas fa-trash"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class=" mb-1 mt-5 col-4 offset-4">
+				<!-- <button type="button" class="btn btn-secondary">Load More</button> -->
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,12 @@
+@import "~bootswatch/dist/cosmo/variables";
+.support-out-icon {
+  font-size: 30px;
+  border: solid $gray-400 2px;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  padding-top: 5px;
+  text-align: center;
+  background-color: $success;
+  color: $light;
+}

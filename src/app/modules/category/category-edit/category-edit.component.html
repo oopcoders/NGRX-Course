@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+	<div class="col-8 mt-4">
+		<h4>Edit Category</h4>
+		<form #f="ngForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="categoryName">Category Name</label>
+				<input type="text" class="form-control" name="name" required [(ngModel)]="model.name" id="categoryName" placeholder="Name">
+			</div>
+			<div class="mb-3 form-group">
+				<label for="categoryDescription">Description</label>
+				<textarea class="form-control" id="categoryDescription" name="description" required [(ngModel)]="model.description"
+						  placeholder="Category Description"></textarea>
+			</div>
+
+			<button class="btn btn-primary m-1" [routerLink]="['/category/list']" type="submit"><i class="fas fa-arrow-left"></i> Back To
+				List</button>
+			<button class="btn btn-warning m-1" type="submit" [disabled]="f.invalid">Edit Category <i class="fas fa-edit"></i></button>
+		</form>
+
+	</div>
+</div>

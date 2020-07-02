@@ -1,0 +1,19 @@
+<div class="text-left mt-5">
+
+	<div>
+		<ul class="list-group">
+			<li class="list-group-item active"><strong>Price</strong></li>
+			<li class="list-group-item" *ngFor="let item of PriceOptions">
+				<div class="custom-control custom-radio">
+					<input type="radio" [(ngModel)]="radioSelected" name="list_name" value="{{item.value}}" id="{{item.value}}"
+						   (change)="onItemChange(item)" class="custom-control-input">
+					<label for="{{item.value}}" class="custom-control-label">{{item.name}}</label><br>
+				</div>
+
+			</li>
+		</ul>
+
+	</div>
+
+
+</div>

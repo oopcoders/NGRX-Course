@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+	<div class="col-8 mt-4" *ngIf="product$ | async as product">
+		<h4>Product Detail</h4>
+		<div class="row mt-4">
+			<div class="col-md-5 col-lg-7">
+
+				<img class="card-img-top" src="{{product.imageUrl}}" alt="Card image cap">
+				<div class=" mt-4">
+					<div>
+						<p>Price: ${{product.price}}</p>
+					</div>
+					<div>
+						<p>
+							In Stock: {{product.quantity}}
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7 col-lg-5">
+				<div class="card-body">
+					<h5 class="card-title">{{product.name}}</h5>
+					<p class="card-text">{{product.description}}
+					</p>
+				</div>
+				<div class="text-center">
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<button type="button" class="btn btn-warning" [routerLink]="['/shopping/product-edit', product.id]">Edit <i
+							   class="fas fa-edit"></i></button>
+						<button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger">Remove <i class="fas fa-trash"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-4">
+			<button class="btn btn-primary" [routerLink]="['/shopping/product-list']" routerLinkActive="router-link-active"><i
+				   class="fas fa-arrow-left"></i>
+				Back To List</button>
+		</div>
+	</div>
+
+</div>

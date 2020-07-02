@@ -1,0 +1,16 @@
+@import "~bootswatch/dist/cosmo/variables";
+.auth-links a {
+  display: inline-block;
+  padding: 0px 10px;
+  color: $light;
+  cursor: pointer;
+}
+.auth-logout-link {
+  cursor: pointer;
+}
+.auth-admin-link {
+  background-color: $danger;
+}
+.user-link {
+  background-color: $info;
+}
