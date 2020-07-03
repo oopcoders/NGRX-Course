@@ -18,6 +18,7 @@ import { TopBarComponent } from './shared/top-bar/top-bar.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CartModule } from './modules/cart/cart.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000, position: 'right' }),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
