@@ -19,6 +19,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CartModule } from './modules/cart/cart.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { StoreModule } from '@ngrx/store';
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],
