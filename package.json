@@ -23,6 +23,10 @@
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@ngrx/effects": "^9.0.0",
+    "@ngrx/schematics": "^9.2.0",
+    "@ngrx/store": "^9.0.0",
+    "@ngrx/store-devtools": "^9.0.0",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
     "concurrently": "^5.2.0",
@@ -33,9 +37,7 @@
     "ngx-spinner": "^9.0.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2",
-    "@ngrx/store": "^9.0.0",
-    "@ngrx/store-devtools": "^9.0.0"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.901.0",
