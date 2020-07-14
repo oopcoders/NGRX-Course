@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="vm$ | async as vm">
 	<h3 class="mt-4 mb-4">Customer Support</h3>
 
 	<div>
@@ -27,12 +27,12 @@
 					<label for="inputMessage">Message</label>
 					<textarea class="form-control" id="inputMessage" rows="3" ngModel name="message"></textarea>
 				</div>
-				<ng-container *ngIf="isSendSuccess != null">
-					<div class="alert alert-dismissible alert-success" *ngIf="isSendSuccess">
+				<ng-container *ngIf="vm.isSentSuccess != null">
+					<div class="alert alert-dismissible alert-success" *ngIf="vm.isSentSuccess">
 						<button type="button" class="close" data-dismiss="alert" (click)="clearFeedback()">&times;</button>
-						<strong>We got your message {{name$ | async}}!</strong> We will be in touch.
+						<strong>We got your message {{vm.name}}!</strong> We will be in touch.
 					</div>
-					<div class="alert alert-dismissible alert-danger" *ngIf="!isSendSuccess">
+					<div class="alert alert-dismissible alert-danger" *ngIf="!vm.isSentSuccess">
 						<button type="button" class="close" data-dismiss="alert" (click)="clearFeedback()">&times;</button>
 						<strong>Oh snap!</strong> Unable to send message. Please contact us at our customer support line at 123-456-7890.
 					</div>

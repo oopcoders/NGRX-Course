@@ -14,3 +14,18 @@ export const selectName = createSelector(
   selectCustomerSupportFeature,
   (state: State) => state.name
 );
+
+export interface CustomerSupportViewModel {
+  name: string;
+  isSentSuccess: boolean;
+}
+
+export const selectCustomerSupportModel = createSelector(
+  selectCustomerSupportFeature,
+  (state: State): CustomerSupportViewModel => {
+    return {
+      name: state.name,
+      isSentSuccess: state.isSentSuccess,
+    };
+  }
+);

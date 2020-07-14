@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { sendingCustomerSupportMessage } from 'src/app/store/actions/customer-support.actions';
-import { selectName } from 'src/app/store/selectors/customer-support.selectors';
+import * as fromSelectors from 'src/app/store/selectors/customer-support.selectors';
 
 @Component({
   selector: 'app-customer-support',
@@ -19,10 +19,13 @@ export class CustomerSupportComponent implements OnInit {
   ) {}
 
   isSendSuccess: boolean | null = null;
-  name$: Observable<string>;
+
+  vm$: Observable<fromSelectors.CustomerSupportViewModel>;
 
   ngOnInit(): void {
-    this.name$ = this.store.pipe(select(selectName));
+    this.vm$ = this.store.pipe(
+      select(fromSelectors.selectCustomerSupportModel)
+    );
   }
 
   onSubmit(f: NgForm) {
