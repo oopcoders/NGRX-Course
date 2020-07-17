@@ -4,7 +4,10 @@ import { CustomerSupportService } from 'src/app/shared/services/customer-support
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { sendingCustomerSupportMessage } from 'src/app/store/actions/customer-support.actions';
+import {
+  sendingCustomerSupportMessage,
+  clearForm,
+} from 'src/app/store/actions/customer-support.actions';
 import * as fromSelectors from 'src/app/store/selectors/customer-support.selectors';
 
 @Component({
@@ -30,14 +33,9 @@ export class CustomerSupportComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.store.dispatch(sendingCustomerSupportMessage({ data: f.value }));
-    this.isSendSuccess = true;
-    // this.customerSupportService.sendMessage(f.value).subscribe((success) => {
-    //   console.log(success);
-    //   this.isSendSuccess = success;
-    // });
   }
 
   clearFeedback() {
-    this.isSendSuccess = null;
+    this.store.dispatch(clearForm());
   }
 }
