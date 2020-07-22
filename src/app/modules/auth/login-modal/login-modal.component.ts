@@ -8,6 +8,9 @@ import { User } from '../resources/auth';
 import { Observable } from 'rxjs';
 import { MockApiCartService } from '../../cart/resources/mock-api-cart.service';
 import { ModalService } from '../resources/modal.service';
+import * as fromAuthActions from 'src/app/store/actions/auth.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-login-modal',
@@ -23,7 +26,8 @@ export class LoginModalComponent implements OnInit {
     private route: Router,
     public authService: AuthService,
     private cartService: MockApiCartService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {}
@@ -39,33 +43,39 @@ export class LoginModalComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    this.spinner.show();
-    this.alertService.info('Checking your information...');
-    const observer = {
-      next: (user) => {
-        this.user = user;
+    this.store.dispatch(
+      fromAuthActions.loginModal({
+        username: f.value.username,
+        password: f.value.password,
+      })
+    );
+    // this.spinner.show();
+    // this.alertService.info('Checking your information...');
+    // const observer = {
+    //   next: (user) => {
+    //     this.user = user;
 
-        this.updateShoppingCart(this.user.id);
+    //     this.updateShoppingCart(this.user.id);
 
-        this.authService.updatedUserSelection(this.user);
-        this.modalService.hide();
-        setTimeout(() => {
-          /** spinner ends after 5 seconds */
-          this.spinner.hide();
-          this.alertService.success(
-            'Welcome Back ' + this.user.username + ' !'
-          );
-          this.route.navigate(['/shopping/products']);
-        }, 1000);
-      },
-      error: (err) => {
-        this.alertService.danger('Unable to login');
-        this.spinner.hide();
-      },
-    };
-    this.authService
-      .login(f.value.username, f.value.password)
-      .subscribe(observer);
+    //     this.authService.updatedUserSelection(this.user);
+    //     this.modalService.hide();
+    //     setTimeout(() => {
+    //       /** spinner ends after 5 seconds */
+    //       this.spinner.hide();
+    //       this.alertService.success(
+    //         'Welcome Back ' + this.user.username + ' !'
+    //       );
+    //       this.route.navigate(['/shopping/products']);
+    //     }, 1000);
+    //   },
+    //   error: (err) => {
+    //     this.alertService.danger('Unable to login');
+    //     this.spinner.hide();
+    //   },
+    // };
+    // this.authService
+    //   .login(f.value.username, f.value.password)
+    //   .subscribe(observer);
   }
 
   cancel(): void {
