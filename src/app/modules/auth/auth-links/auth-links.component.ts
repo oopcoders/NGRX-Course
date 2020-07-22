@@ -1,12 +1,16 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../resources/auth.service';
 import { AlertService } from 'ngx-alerts';
 import { MockApiCartService } from '../../cart/resources/mock-api-cart.service';
 import { Router } from '@angular/router';
-import { User } from '../resources/auth';
 import * as fromAuthModels from '../resources/auth';
 import { ModalService } from '../resources/modal.service';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+
+import * as fromAuthSelectors from 'src/app/store/selectors/auth.selectors';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth-links',
@@ -14,18 +18,20 @@ import { LoginModalComponent } from '../login-modal/login-modal.component';
   styleUrls: ['./auth-links.component.scss'],
 })
 export class AuthLinksComponent implements OnInit {
-  user: User;
-
+  vm$: Observable<fromAuthSelectors.AuthLinksViewModal>;
   constructor(
     public authService: AuthService,
     private alertService: AlertService,
     private cartService: MockApiCartService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    this.authService.user.subscribe((user) => (this.user = user));
+    this.vm$ = this.store.pipe(
+      select(fromAuthSelectors.selectAuthLinksViewModel)
+    );
   }
 
   logout() {

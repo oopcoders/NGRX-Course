@@ -1,8 +1,8 @@
-<div class="auth-links">
-	<a *ngIf="user?.isadmin" class="auth-admin-link" [routerLink]="['/admin/product-list']"><i class="fas fa-user-shield"></i>
+<div class="auth-links" *ngIf="vm$ | async as vm">
+	<a *ngIf="vm.isAdmin" class="auth-admin-link" [routerLink]="['/admin/product-list']"><i class="fas fa-user-shield"></i>
 		Admin</a>
-	<a *ngIf="!user.isadmin && user.id" class="user-link" [routerLink]="['/shopping/products']"><i class="fas fa-user"></i> User</a>
-	<a *ngIf="!user.id" (click)="openModal()"><i class="fas fa-sign-in-alt"></i> Login Modal</a>
-	<a *ngIf="!user.id" [routerLink]="['/auth/login']" routerLinkActive="active"><i class="fas fa-sign-in-alt"></i> Login Page</a>
-	<a *ngIf="user.id" class="auth-logout-link" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+	<a *ngIf="!vm.isAdmin && vm.isLoggedin" class="user-link" [routerLink]="['/shopping/products']"><i class="fas fa-user"></i> User</a>
+	<a *ngIf="!vm.isLoggedin" (click)="openModal()"><i class="fas fa-sign-in-alt"></i> Login Modal</a>
+	<a *ngIf="!vm.isLoggedin" [routerLink]="['/auth/login']" routerLinkActive="active"><i class="fas fa-sign-in-alt"></i> Login Page</a>
+	<a *ngIf="vm.isLoggedin" class="auth-logout-link" (click)="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
 </div>
