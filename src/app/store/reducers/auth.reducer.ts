@@ -22,7 +22,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  on(AuthActions.loginSuccess, (state, action) => {
+  on(AuthActions.loginSuccess, AuthActions.browserReload, (state, action) => {
     return {
       ...state,
       user: action.user,

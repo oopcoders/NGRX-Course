@@ -22,3 +22,8 @@ export const loginFailure = createAction(
 );
 
 export const logout = createAction('[Auth Links Component] Logout User');
+
+export const browserReload = createAction(
+  '[Core Component] Browser Reload',
+  props<{ user: User }>()
+);
