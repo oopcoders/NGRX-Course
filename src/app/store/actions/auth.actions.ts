@@ -20,3 +20,5 @@ export const loginFailure = createAction(
   '[Auth Effect] Login User Failure',
   props<{ error: any }>()
 );
+
+export const logout = createAction('[Auth Links Component] Logout User');

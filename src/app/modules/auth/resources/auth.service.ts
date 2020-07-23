@@ -27,7 +27,6 @@ export class AuthService {
       switchMap((users) => {
         let user = users[0];
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
           return of(user);
         } else {
           return throwError('Unable to login');
