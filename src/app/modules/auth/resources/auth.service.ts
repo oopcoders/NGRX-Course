@@ -15,11 +15,6 @@ export class AuthService {
   /********************************************************************************** */
   baseUrl: string = 'http://localhost:3000/users/';
 
-  private userSource = new BehaviorSubject<fromAuthModels.User>(
-    fromAuthModels.UserModel
-  );
-  user = this.userSource.asObservable();
-
   constructor(private http: HttpClient) {}
   //Fake Login API
   login(username: string, password: string): Observable<any> {
@@ -33,9 +28,5 @@ export class AuthService {
         }
       })
     );
-  }
-
-  updatedUserSelection(user: fromAuthModels.User) {
-    this.userSource.next(user);
   }
 }
