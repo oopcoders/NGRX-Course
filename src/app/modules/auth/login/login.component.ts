@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.store.dispatch(
-      fromAuthActions.loginModal({
+      fromAuthActions.loginPage({
         username: f.value.username,
         password: f.value.password,
       })
