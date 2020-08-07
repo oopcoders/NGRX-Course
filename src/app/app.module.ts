@@ -29,6 +29,7 @@ import { AlertEffects } from './store/effects/alert.effects';
 import { RouteEffects } from './store/effects/route.effects';
 import { ModalEffects } from './store/effects/modal.effects';
 import { AppEffects } from './store/effects/app.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { AppEffects } from './store/effects/app.effects';
       ModalEffects,
       AppEffects,
     ]),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
