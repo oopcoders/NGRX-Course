@@ -9,6 +9,9 @@ import * as fromProductModels from '../products/resources/product';
 import { environment } from 'src/environments/environment';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { Pagination } from 'src/app/shared/models/pagination';
+import * as fromProductActions from './state/product.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-products',
@@ -26,19 +29,31 @@ export class ProductsComponent implements OnInit {
     private alertService: AlertService,
     private spinner: NgxSpinnerService,
     private authService: AuthService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.loadProducts(
-      this.paginationService.createUrl(
-        '0',
-        '999',
-        '1',
-        '9',
-        environment.baseUrl + 'products?'
-      )
+    this.store.dispatch(
+      fromProductActions.loadProducts({
+        url: this.paginationService.createUrl(
+          '0',
+          '999',
+          '1',
+          '9',
+          environment.baseUrl + 'products?'
+        ),
+      })
     );
+    // this.loadProducts(
+    //   this.paginationService.createUrl(
+    //     '0',
+    //     '999',
+    //     '1',
+    //     '9',
+    //     environment.baseUrl + 'products?'
+    //   )
+    // );
   }
 
   loadProducts(url: string) {

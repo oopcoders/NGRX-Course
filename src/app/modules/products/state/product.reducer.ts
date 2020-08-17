@@ -8,16 +8,27 @@ export const productsFeatureKey = 'products';
 
 export interface State extends EntityState<Product> {
   // additional entities state properties
+  error: any;
 }
 
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
+  error: null,
 });
 
 export const reducer = createReducer(
   initialState,
+  on(ProductActions.loadProductsSuccess, (state, action) =>
+    adapter.setAll(action.products, state)
+  ),
+  on(ProductActions.loadProductsFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
   on(ProductActions.addProduct, (state, action) =>
     adapter.addOne(action.product, state)
   ),
@@ -41,9 +52,6 @@ export const reducer = createReducer(
   ),
   on(ProductActions.deleteProducts, (state, action) =>
     adapter.removeMany(action.ids, state)
-  ),
-  on(ProductActions.loadProducts, (state, action) =>
-    adapter.setAll(action.products, state)
   ),
   on(ProductActions.clearProducts, (state) => adapter.removeAll(state))
 );
