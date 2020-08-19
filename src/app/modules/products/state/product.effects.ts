@@ -16,7 +16,7 @@ export class ProductEffects {
       mergeMap((action) =>
         this.productService.getProducts(action.url).pipe(
           map((data) =>
-            ProductActions.loadProductsSuccess({ products: data.result })
+            ProductActions.loadProductsSuccess({ paginatedResult: data })
           ),
           catchError((error) =>
             of(ProductActions.loadProductsFailure({ error }))

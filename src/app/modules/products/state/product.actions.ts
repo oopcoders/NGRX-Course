@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Product } from '../resources/product';
+import { Product, PaginatedResult } from '../resources/product';
 
 /****************************************************************** */
 /*****LOAD PRODUCTS ** */
@@ -17,7 +17,7 @@ export const loadAdminProducts = createAction(
 
 export const loadProductsSuccess = createAction(
   '[Product Effect] Load Products Success',
-  props<{ products: Product[] }>()
+  props<{ paginatedResult: PaginatedResult<Product[]> }>()
 );
 
 export const loadProductsFailure = createAction(
