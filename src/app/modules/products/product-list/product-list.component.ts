@@ -6,8 +6,10 @@ import * as fromProductModels from '../resources/product';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import * as fromProductActions from '../state/product.actions';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import * as ProductSelector from '../state/product.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -26,49 +28,45 @@ export class ProductListComponent implements OnInit {
   products: fromProductModels.Product[] = [];
   pagination: fromProductModels.Pagination;
   currentUrl: string;
+  vm$: Observable<ProductSelector.ProductsViewModel>;
 
   ngOnInit(): void {
-    this.store.dispatch(
-      fromProductActions.loadAdminProducts({
-        url: this.paginationService.createUrl(
-          '0',
-          '999',
-          '1',
-          '25',
-          environment.baseUrl + 'products?'
-        ),
-      })
+    this.vm$ = this.store.pipe(select(ProductSelector.selectProductsViewModel));
+    this.loadProducts(
+      this.paginationService.createUrl(
+        '0',
+        '999',
+        '1',
+        '25',
+        environment.baseUrl + 'products?'
+      )
     );
-    // this.loadProducts(
-    //   this.paginationService.createUrl(
-    //     '0',
-    //     '999',
-    //     '1',
-    //     '25',
-    //     environment.baseUrl + 'products?'
-    //   )
-    // );
   }
 
   loadProducts(url: string) {
-    this.currentUrl = url;
-    this.spinner.show();
-    const productsObserver = {
-      next: (response) => {
-        this.products = response.result;
-        this.pagination = response.pagination;
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.danger('Unable to load products');
-        this.spinner.hide();
-      },
-    };
+    this.store.dispatch(
+      fromProductActions.loadAdminProducts({
+        url: url,
+      })
+    );
+    // this.currentUrl = url;
+    // this.spinner.show();
+    // const productsObserver = {
+    //   next: (response) => {
+    //     this.products = response.result;
+    //     this.pagination = response.pagination;
+    //     setTimeout(() => {
+    //       this.spinner.hide();
+    //     }, 1000);
+    //   },
+    //   error: (err) => {
+    //     console.error(err);
+    //     this.alertService.danger('Unable to load products');
+    //     this.spinner.hide();
+    //   },
+    // };
 
-    this.productService.getProducts(url).subscribe(productsObserver);
+    // this.productService.getProducts(url).subscribe(productsObserver);
   }
 
   deleteProduct(id: number) {
