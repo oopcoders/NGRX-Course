@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AlertService } from 'ngx-alerts';
 import * as fromAuthActions from '../actions/auth.actions';
 import { tap } from 'rxjs/operators';
+import * as fromProductActions from '../../modules/products/state/product.actions';
 
 @Injectable()
 export class AlertEffects {
@@ -57,5 +58,19 @@ export class AlertEffects {
       ),
     { dispatch: false }
   );
+
+  unableToLoadProducts$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.loadProductsFailure),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.danger('Unable to load products');
+          }, 2000)
+        )
+      ),
+    { dispatch: false }
+  );
+
   constructor(private actions$: Actions, private alertService: AlertService) {}
 }
