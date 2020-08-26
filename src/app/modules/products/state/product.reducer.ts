@@ -12,7 +12,10 @@ export interface State extends EntityState<Product> {
   error: any;
 }
 
-export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
+export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>({
+  sortComparer: sortByName,
+  //selectId: selectProductId
+});
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
@@ -67,3 +70,12 @@ export const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
+
+export function sortByName(a: Product, b: Product): number {
+  return a.name.localeCompare(b.name);
+}
+
+// export function selectProductId(a: Product): string {
+//   //In this case this would be optional since primary key is id
+//   return a.productid;
+// }
