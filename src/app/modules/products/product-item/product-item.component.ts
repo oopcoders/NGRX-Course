@@ -5,6 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MockProductApiService } from '../resources/mock-product-api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertService } from 'ngx-alerts';
+import { mergeMap } from 'rxjs/operators';
+import * as fromProductSelectors from '../state/product.selectors';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-product-item',
@@ -13,25 +17,47 @@ import { AlertService } from 'ngx-alerts';
 })
 export class ProductItemComponent implements OnInit {
   product$: Observable<Product>;
+  isProductInStore$: Observable<boolean>;
+  productId: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: MockProductApiService,
     private alertService: AlertService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.spinner.show();
+    this.productId = this.route.snapshot.paramMap.get('id');
 
-    this.product$ = this.service.getProduct(
-      this.route.snapshot.paramMap.get('id')
+    this.isProductInStore$ = this.store.pipe(
+      select(fromProductSelectors.entityExists, { id: this.productId })
     );
 
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 1000);
+    this.product$ = this.isProductInStore$.pipe(
+      mergeMap((isProductInStore) => {
+        if (!isProductInStore) {
+          console.log('Get product from API');
+        }
+
+        return this.store.pipe(
+          select(fromProductSelectors.selectEntityById, {
+            id: this.productId,
+          })
+        );
+      })
+    );
+    // this.spinner.show();
+
+    // this.product$ = this.service.getProduct(
+    //   this.route.snapshot.paramMap.get('id')
+    // );
+
+    // setTimeout(() => {
+    //   this.spinner.hide();
+    // }, 1000);
   }
 
   deleteProduct(id: number) {

@@ -12,6 +12,11 @@ export const selectAllProducts = createSelector(
   ProductReducer.selectAll
 );
 
+export const selectAllEntities = createSelector(
+  selectProductsState,
+  ProductReducer.selectEntities
+);
+
 export const selectPagination = createSelector(
   selectProductsState,
   (state: ProductReducer.State) => state.pagination
@@ -38,4 +43,16 @@ export const selectProductsViewModel = createSelector(
       products: products,
     };
   }
+);
+
+export const entityExists = createSelector(
+  selectAllEntities,
+  (entities, props): boolean => {
+    return entities[props.id] == undefined ? false : true;
+  }
+);
+
+export const selectEntityById = createSelector(
+  selectAllEntities,
+  (entities, props) => entities[props.id]
 );
