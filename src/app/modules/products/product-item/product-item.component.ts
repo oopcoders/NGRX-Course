@@ -9,6 +9,7 @@ import { mergeMap } from 'rxjs/operators';
 import * as fromProductSelectors from '../state/product.selectors';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store';
+import * as fromProductActions from '../state/product.actions';
 
 @Component({
   selector: 'app-product-item',
@@ -39,7 +40,9 @@ export class ProductItemComponent implements OnInit {
     this.product$ = this.isProductInStore$.pipe(
       mergeMap((isProductInStore) => {
         if (!isProductInStore) {
-          console.log('Get product from API');
+          this.store.dispatch(
+            fromProductActions.loadAdminProduct({ id: this.productId })
+          );
         }
 
         return this.store.pipe(

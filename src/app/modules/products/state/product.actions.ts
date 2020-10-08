@@ -25,6 +25,30 @@ export const loadProductsFailure = createAction(
   props<{ error: any }>()
 );
 
+/****************************************************************** */
+/*****LOAD INDIVIDUAL PRODUCT ** */
+/****************************************************************** */
+
+export const loadProduct = createAction(
+  '[Product View Component] Load Product',
+  props<{ id: string }>()
+);
+
+export const loadAdminProduct = createAction(
+  '[Product Item Component] Load Product',
+  props<{ id: string }>()
+);
+
+export const loadProductSuccess = createAction(
+  '[Product Effect] Load Product Success',
+  props<{ product: Product }>()
+);
+
+export const loadProductFailure = createAction(
+  '[Product Effect] Load Product Failure',
+  props<{ error: any }>()
+);
+
 export const addProduct = createAction(
   '[Product/API] Add Product',
   props<{ product: Product }>()

@@ -26,6 +26,26 @@ export class ProductEffects {
     );
   });
 
+  /****************************************************************** */
+  /*****LOAD PRODUCT API EFFECT ** */
+  /****************************************************************** */
+
+  loadProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.loadProduct, ProductActions.loadAdminProduct),
+      mergeMap((action) =>
+        this.productService.getProduct(action.id).pipe(
+          map((product) =>
+            ProductActions.loadProductSuccess({ product: product })
+          ),
+          catchError((error) =>
+            of(ProductActions.loadProductFailure({ error: error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private productService: MockProductApiService
