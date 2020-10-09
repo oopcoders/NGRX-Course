@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MockProductApiService } from '../resources/mock-product-api.service';
 import { Product } from '../resources/product';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { AlertService } from 'ngx-alerts';
 import * as fromProductSelectors from '../state/product.selectors';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/store';
@@ -21,12 +18,7 @@ export class ProductViewComponent implements OnInit {
   isProductInStore$: Observable<boolean>;
   product$: Observable<Product>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private productService: MockProductApiService,
-    private spinner: NgxSpinnerService,
-    private store: Store<AppState>
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
@@ -50,22 +42,5 @@ export class ProductViewComponent implements OnInit {
         );
       })
     );
-
-    // this.spinner.show();
-    // const observer = {
-    //   next: (product) => {
-    //     this.product = product;
-    //     setTimeout(() => {
-    //       this.spinner.hide();
-    //     }, 1000);
-    //   },
-    //   error: (err) => {
-    //     this.spinner.hide();
-    //     console.error(err);
-    //   },
-    // };
-    // this.productService
-    //   .getProduct(this.route.snapshot.paramMap.get('id'))
-    //   .subscribe(observer);
   }
 }

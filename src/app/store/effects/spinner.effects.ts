@@ -15,7 +15,9 @@ export class SpinnerEffects {
           fromAuthActions.loginPage,
           fromAuthActions.loginModal,
           fromProductActions.loadProducts,
-          fromProductActions.loadAdminProducts
+          fromProductActions.loadAdminProducts,
+          fromProductActions.loadProduct,
+          fromProductActions.loadAdminProduct
         ),
         tap(() => this.spinner.show())
       ),
@@ -29,7 +31,9 @@ export class SpinnerEffects {
           fromAuthActions.loginSuccess,
           fromAuthActions.loginFailure,
           fromProductActions.loadProductsFailure,
-          fromProductActions.loadProductsSuccess
+          fromProductActions.loadProductsSuccess,
+          fromProductActions.loadProductFailure,
+          fromProductActions.loadProductSuccess
         ),
         tap(() => {
           setTimeout(() => {

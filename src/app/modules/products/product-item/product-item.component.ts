@@ -52,15 +52,6 @@ export class ProductItemComponent implements OnInit {
         );
       })
     );
-    // this.spinner.show();
-
-    // this.product$ = this.service.getProduct(
-    //   this.route.snapshot.paramMap.get('id')
-    // );
-
-    // setTimeout(() => {
-    //   this.spinner.hide();
-    // }, 1000);
   }
 
   deleteProduct(id: number) {
