@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MockProductApiService } from '../resources/mock-product-api.service';
-import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { addProduct } from '../state/product.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-product-add',
@@ -9,21 +10,11 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./product-add.component.scss'],
 })
 export class ProductAddComponent implements OnInit {
-  constructor(
-    private productService: MockProductApiService,
-    private router: Router
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {}
 
   onSubmit(f: NgForm) {
-    const productObserver = {
-      next: (product) => (
-        this.router.navigate(['/shopping/product-list']), console.log('success')
-      ),
-      error: (err) => console.error(err),
-    };
-
-    this.productService.createProduct(f.value).subscribe(productObserver);
+    this.store.dispatch(addProduct({ product: f.value }));
   }
 }

@@ -21,8 +21,8 @@ export class MockProductApiService {
 
   baseUrl: string = 'http://localhost:3000/';
 
-  createProduct(model: Product) {
-    return this.http.post(this.baseUrl + 'products', model);
+  createProduct(model: Product): Observable<Product> {
+    return this.http.post<Product>(this.baseUrl + 'products', model);
   }
 
   getProducts(url: string): Observable<PaginatedResult<Product[]>> {

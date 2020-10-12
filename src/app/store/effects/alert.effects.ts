@@ -72,5 +72,27 @@ export class AlertEffects {
     { dispatch: false }
   );
 
+  productCreated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.addProductSuccess),
+        tap((action) => this.alertService.success('Product Created'))
+      ),
+    { dispatch: false }
+  );
+
+  unableToCreateProduct$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.addProductFailure),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.danger('Unable to create product');
+          }, 2000)
+        )
+      ),
+    { dispatch: false }
+  );
+
   constructor(private actions$: Actions, private alertService: AlertService) {}
 }

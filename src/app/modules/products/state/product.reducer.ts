@@ -37,10 +37,18 @@ export const reducer = createReducer(
       error: action.error,
     };
   }),
-  on(ProductActions.loadProductSuccess, (state, action) =>
-    adapter.addOne(action.product, state)
+  on(
+    ProductActions.loadProductSuccess,
+    ProductActions.addProductSuccess,
+    (state, action) => adapter.addOne(action.product, state)
   ),
   on(ProductActions.loadProductFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+  on(ProductActions.addProductFailure, (state, action) => {
     return {
       ...state,
       error: action.error,

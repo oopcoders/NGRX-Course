@@ -1599,6 +1599,22 @@
       "price": "365.00",
       "imageUrl": "https://source.unsplash.com/1600x900/?product",
       "quantity": 95750
+    },
+    {
+      "name": "Awesome Product",
+      "description": "My really awesome product description",
+      "price": "100.00",
+      "quantity": 2,
+      "imageUrl": "https://source.unsplash.com/1600x900/?product",
+      "id": 201
+    },
+    {
+      "name": "Awesome Product 2",
+      "description": "My really awesome product description 2",
+      "price": "100.00",
+      "quantity": 4,
+      "imageUrl": "https://source.unsplash.com/1600x900/?product",
+      "id": 202
     }
   ],
   "categories": [

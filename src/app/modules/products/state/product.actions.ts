@@ -49,9 +49,23 @@ export const loadProductFailure = createAction(
   props<{ error: any }>()
 );
 
+/****************************************************************** */
+/*****ADD INDIVIDUAL PRODUCT ** */
+/****************************************************************** */
+
 export const addProduct = createAction(
-  '[Product/API] Add Product',
+  '[Product Add Component] Add Product',
   props<{ product: Product }>()
+);
+
+export const addProductSuccess = createAction(
+  '[Product Effect] Add Product Success',
+  props<{ product: Product }>()
+);
+
+export const addProductFailure = createAction(
+  '[Product Effect] Add Product Failure',
+  props<{ error: any }>()
 );
 
 export const upsertProduct = createAction(

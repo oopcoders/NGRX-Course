@@ -46,6 +46,25 @@ export class ProductEffects {
     )
   );
 
+  /****************************************************************** */
+  /*****CREATE PRODUCT API EFFECT ** */
+  /****************************************************************** */
+  createProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.addProduct),
+      mergeMap((action) =>
+        this.productService.createProduct(action.product).pipe(
+          map((product) =>
+            ProductActions.addProductSuccess({ product: product })
+          ),
+          catchError((error) =>
+            of(ProductActions.addProductFailure({ error: error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private productService: MockProductApiService

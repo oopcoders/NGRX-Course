@@ -17,7 +17,8 @@ export class SpinnerEffects {
           fromProductActions.loadProducts,
           fromProductActions.loadAdminProducts,
           fromProductActions.loadProduct,
-          fromProductActions.loadAdminProduct
+          fromProductActions.loadAdminProduct,
+          fromProductActions.addProduct
         ),
         tap(() => this.spinner.show())
       ),
@@ -33,7 +34,9 @@ export class SpinnerEffects {
           fromProductActions.loadProductsFailure,
           fromProductActions.loadProductsSuccess,
           fromProductActions.loadProductFailure,
-          fromProductActions.loadProductSuccess
+          fromProductActions.loadProductSuccess,
+          fromProductActions.addProductSuccess,
+          fromProductActions.addProductFailure
         ),
         tap(() => {
           setTimeout(() => {
