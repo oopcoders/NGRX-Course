@@ -94,5 +94,30 @@ export class AlertEffects {
     { dispatch: false }
   );
 
+  productUpsertSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.upsertProductSuccess),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.info('Product Updated');
+          }, 1000)
+        )
+      ),
+    { dispatch: false }
+  );
+  unableToEditProduct$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.upsertProductFailure),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.danger('Unable to edit product');
+          }, 1000)
+        )
+      ),
+    { dispatch: false }
+  );
+
   constructor(private actions$: Actions, private alertService: AlertService) {}
 }

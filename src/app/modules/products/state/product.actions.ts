@@ -68,29 +68,20 @@ export const addProductFailure = createAction(
   props<{ error: any }>()
 );
 
+/****************************************************************** */
+/*****UPDATE INDIVIDUAL PRODUCT ** */
+/****************************************************************** */
 export const upsertProduct = createAction(
-  '[Product/API] Upsert Product',
+  '[Product Edit Component] Upsert Product',
   props<{ product: Product }>()
 );
-
-export const addProducts = createAction(
-  '[Product/API] Add Products',
-  props<{ products: Product[] }>()
+export const upsertProductSuccess = createAction(
+  '[Product Effect] Upsert Product Success',
+  props<{ product: Product }>()
 );
-
-export const upsertProducts = createAction(
-  '[Product/API] Upsert Products',
-  props<{ products: Product[] }>()
-);
-
-export const updateProduct = createAction(
-  '[Product/API] Update Product',
-  props<{ product: Update<Product> }>()
-);
-
-export const updateProducts = createAction(
-  '[Product/API] Update Products',
-  props<{ products: Update<Product>[] }>()
+export const upsertProductFailure = createAction(
+  '[Product Effect] Upsert Product failure',
+  props<{ error: any }>()
 );
 
 export const deleteProduct = createAction(
