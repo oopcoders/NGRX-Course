@@ -513,14 +513,6 @@
       "quantity": 63367
     },
     {
-      "id": 65,
-      "name": "Awesome Rubber Bacon",
-      "description": "Officia dignissimos et voluptas. Atque quisquam quia officia magnam nostrum enim similique libero. Eligendi quibusdam doloremque aspernatur omnis odio est molestiae ipsa. Sed et a voluptatem dolores quos et neque. Est rerum exercitationem est illo aut fuga delectus nesciunt. Architecto quisquam exercitationem distinctio sit.",
-      "price": "155.00",
-      "imageUrl": "https://source.unsplash.com/1600x900/?product",
-      "quantity": 41674
-    },
-    {
       "id": 66,
       "name": "Gorgeous Concrete Chips",
       "description": "Adipisci facere voluptatem hic ut. Dolorum sunt soluta ratione. Et et et sequi voluptas facere alias corporis ipsa nemo. Ipsum modi dolor nobis sint.",
@@ -1599,22 +1591,6 @@
       "price": "365.00",
       "imageUrl": "https://source.unsplash.com/1600x900/?product",
       "quantity": 95750
-    },
-    {
-      "name": "Awesome Product",
-      "description": "My really awesome product description",
-      "price": "100.00",
-      "quantity": 9,
-      "imageUrl": "https://source.unsplash.com/1600x900/?product",
-      "id": 201
-    },
-    {
-      "name": "Awesome Product 2",
-      "description": "My really awesome product description 2",
-      "price": "100.00",
-      "quantity": 4,
-      "imageUrl": "https://source.unsplash.com/1600x900/?product",
-      "id": 202
     }
   ],
   "categories": [
@@ -1890,7 +1866,27 @@
     {
       "id": 2,
       "userid": 1,
-      "products": []
+      "products": [
+        {
+          "id": 5,
+          "name": "Handcrafted Rubber Bacon",
+          "description": "Nihil itaque doloribus repellendus est distinctio. Consequatur voluptatem assumenda necessitatibus est a autem facere. Rerum quos maxime commodi.",
+          "price": "135.00",
+          "imageUrl": "https://source.unsplash.com/1600x900/?product",
+          "quantity": 12177
+        },
+        {
+          "id": 34,
+          "name": "Handmade Fresh Ball",
+          "description": "Qui at deserunt sint odit quae ut impedit blanditiis esse. Atque excepturi sint doloribus laborum. Dolor assumenda iste et debitis delectus accusantium. Molestiae modi molestiae quo quia voluptas omnis veniam recusandae. Sint unde sint. Et dicta eaque sunt dolor doloremque.",
+          "price": "134.00",
+          "imageUrl": "https://source.unsplash.com/1600x900/?product",
+          "quantity": 40117
+        }
+      ],
+      "isCartEmpty": false,
+      "cartItemsLength": 1,
+      "productsSubtotal": 135
     }
   ],
   "users": [

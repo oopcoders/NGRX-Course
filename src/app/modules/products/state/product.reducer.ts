@@ -39,11 +39,10 @@ export const reducer = createReducer(
   on(ProductActions.upsertProductSuccess, (state, action) =>
     adapter.upsertOne(action.product, state)
   ),
-  on(ProductActions.deleteProduct, (state, action) =>
-    adapter.removeOne(action.id, state)
-  ),
-  on(ProductActions.deleteProducts, (state, action) =>
-    adapter.removeMany(action.ids, state)
+  on(
+    ProductActions.deleteProduct,
+    ProductActions.deleteItemProduct,
+    (state, action) => adapter.removeOne(action.productId, state)
   ),
   on(ProductActions.clearProducts, (state) => adapter.removeAll(state)),
   on(
@@ -51,6 +50,7 @@ export const reducer = createReducer(
     ProductActions.loadProductsFailure,
     ProductActions.addProductFailure,
     ProductActions.loadProductFailure,
+    ProductActions.deleteProductFailure,
     (state, action) => {
       return {
         ...state,

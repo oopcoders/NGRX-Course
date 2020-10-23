@@ -56,7 +56,7 @@ export class MockProductApiService {
     return this.http.put<Product>(this.baseUrl + 'products/' + model.id, model);
   }
 
-  deleteProduct(productId: number) {
+  deleteProduct(productId: string) {
     return this.http.delete(this.baseUrl + 'products/' + productId);
   }
 }

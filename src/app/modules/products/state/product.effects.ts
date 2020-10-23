@@ -82,6 +82,23 @@ export class ProductEffects {
     )
   );
 
+  /****************************************************************** */
+  /*****DELETE PRODUCT API EFFECT ** */
+  /****************************************************************** */
+  deleteProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.deleteProduct, ProductActions.deleteItemProduct),
+      mergeMap((action) =>
+        this.productService.deleteProduct(action.productId).pipe(
+          map(() => ProductActions.deleteProductSuccess()),
+          catchError((error) =>
+            of(ProductActions.deleteProductFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private productService: MockProductApiService

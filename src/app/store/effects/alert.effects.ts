@@ -119,5 +119,45 @@ export class AlertEffects {
     { dispatch: false }
   );
 
+  removeProductFromStore$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          fromProductActions.deleteProduct,
+          fromProductActions.deleteItemProduct
+        ),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.warning('Remove Product From Store');
+          }, 1000)
+        )
+      ),
+    { dispatch: false }
+  );
+  productDeleted$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.deleteProductSuccess),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.info('Product removed from Database');
+          }, 1000)
+        )
+      ),
+    { dispatch: false }
+  );
+  unableToDeleteProduct$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromProductActions.deleteProductFailure),
+        tap(() =>
+          setTimeout(() => {
+            this.alertService.danger('Unable to delete product');
+          }, 1000)
+        )
+      ),
+    { dispatch: false }
+  );
+
   constructor(private actions$: Actions, private alertService: AlertService) {}
 }

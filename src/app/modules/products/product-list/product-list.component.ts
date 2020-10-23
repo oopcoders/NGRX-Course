@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MockProductApiService } from '../resources/mock-product-api.service';
-import { AlertService } from 'ngx-alerts';
-import * as fromProductModels from '../resources/product';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
 import { environment } from 'src/environments/environment';
 import * as fromProductActions from '../state/product.actions';
@@ -17,8 +14,6 @@ import { Observable } from 'rxjs';
 })
 export class ProductListComponent implements OnInit {
   constructor(
-    private productService: MockProductApiService,
-    private alertService: AlertService,
     private paginationService: PaginationService,
     private store: Store<AppState>
   ) {}
@@ -48,18 +43,8 @@ export class ProductListComponent implements OnInit {
     this.currentUrl = url;
   }
 
-  deleteProduct(id: number) {
-    const productsObserver = {
-      next: () => {
-        this.loadProducts(this.currentUrl);
-        this.alertService.success('Product Deleted');
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.danger('Unable To Delete Product');
-      },
-    };
-    this.productService.deleteProduct(id).subscribe(productsObserver);
+  deleteProduct(id: string) {
+    this.store.dispatch(fromProductActions.deleteProduct({ productId: id }));
   }
 
   onPaginationChange(url: string) {

@@ -84,14 +84,26 @@ export const upsertProductFailure = createAction(
   props<{ error: any }>()
 );
 
-export const deleteProduct = createAction(
-  '[Product/API] Delete Product',
-  props<{ id: string }>()
+/****************************************************************** */
+/*****DELETE INDIVIDUAL PRODUCT ** */
+/****************************************************************** */
+
+export const deleteItemProduct = createAction(
+  '[Product Item Component] Delete Product',
+  props<{ productId: string }>()
 );
 
-export const deleteProducts = createAction(
-  '[Product/API] Delete Products',
-  props<{ ids: string[] }>()
+export const deleteProduct = createAction(
+  '[Product List Component] Delete Product',
+  props<{ productId: string }>()
+);
+
+export const deleteProductSuccess = createAction(
+  '[Product Effect] Delete Product Success'
+);
+export const deleteProductFailure = createAction(
+  '[Product Effect] Delete Product Failure',
+  props<{ error: any }>()
 );
 
 export const clearProducts = createAction('[Product/API] Clear Products');

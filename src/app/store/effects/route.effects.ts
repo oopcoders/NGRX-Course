@@ -28,7 +28,10 @@ export class RouteEffects {
   goProductList$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(fromProductActions.upsertProductSuccess),
+        ofType(
+          fromProductActions.upsertProductSuccess,
+          fromProductActions.deleteItemProduct
+        ),
         tap(() => this.route.navigate(['/shopping/product-list']))
       ),
     { dispatch: false }
