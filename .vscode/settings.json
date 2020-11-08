@@ -1,7 +1,7 @@
 {
-	"window.zoomLevel": 2,
-	"debug.console.fontSize": 15,
-	"markdown.preview.fontSize": 15,
-	"terminal.integrated.fontSize": 15,
-	"editor.fontSize": 16.1
+	"window.zoomLevel": 0,
+	"debug.console.fontSize": 12,
+	"markdown.preview.fontSize": 12,
+	"terminal.integrated.fontSize": 12,
+	"editor.fontSize": 12
 }
