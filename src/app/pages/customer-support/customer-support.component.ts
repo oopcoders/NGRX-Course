@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CustomerSupportService } from 'src/app/shared/services/customer-support.service';
-import { sendCustomerSupportMessage } from 'src/app/store/actions/customer-support.actions';
-import { selectName } from 'src/app/store/selectors/customer-support.selectors';
+import * as FromCustomerActions from '../../store/actions/customer-support.actions';
 import { AppState } from './../../store/index';
+// tslint:disable-next-line: import-spacing
+import * as CustomerSelectors from '../../store/selectors/customer-support.selectors';
 
 @Component({
   selector: 'app-customer-support',
@@ -14,29 +15,23 @@ import { AppState } from './../../store/index';
 })
 export class CustomerSupportComponent implements OnInit {
   constructor(
-    private customerSupportService: CustomerSupportService,
     private store: Store<AppState>
   ) { }
 
   isSendSuccess: boolean | null = null;
 
-  name$: Observable<string>;
+  cusData$: Observable<CustomerSelectors.CusSupportData>;
 
   ngOnInit(): void {
-
-    this.name$ = this.store.pipe(select(selectName));
-
+    this.cusData$ = this.store.pipe(select(CustomerSelectors.customerSupportData));
   }
 
   onSubmit(f: NgForm) {
-    // this.customerSupportService.sendMessage(f.value).subscribe((success) => {
-    //   console.log(success);
-    //   this.isSendSuccess = success;
-    // });
-    this.store.dispatch(sendCustomerSupportMessage({ data: f.value }));
+    this.store.dispatch(FromCustomerActions.sendCustomerSupportMessage({ data: f.value }));
+    this.isSendSuccess = true;
   }
 
   clearFeedback() {
-    this.isSendSuccess = null;
+    this.store.dispatch(FromCustomerActions.clearCustomerSupportStatus());
   }
 }

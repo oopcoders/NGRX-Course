@@ -1,3 +1,7 @@
+import { AuthEffects } from './../../store/effects/auth.effects';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromAuth from '../../store/reducers/auth.reducer';
+import { StoreModule } from '@ngrx/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +12,11 @@ import { AuthLinksComponent } from './auth-links/auth-links.component';
 
 @NgModule({
   declarations: [LoginComponent, AuthLinksComponent],
-  imports: [CommonModule, AuthRoutingModule, FormsModule],
+  imports: [
+    CommonModule, AuthRoutingModule, FormsModule,
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
+    EffectsModule.forFeature([AuthEffects])
+  ],
   exports: [AuthLinksComponent],
 })
-export class AuthModule {}
+export class AuthModule { }

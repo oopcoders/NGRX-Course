@@ -5,7 +5,22 @@ export const selectCustomerSupportFeature = createFeatureSelector<State>(
   customerSupportFeatureKey,
 );
 
-export const selectName = createSelector(
+export interface CusSupportData {
+  name: string;
+  isSentSuccess: boolean;
+}
+
+// export const selectName = createSelector(
+//   selectCustomerSupportFeature,
+//   (state: State) => state.name
+// );
+
+export const customerSupportData = createSelector(
   selectCustomerSupportFeature,
-  (state: State) => state.name
+  (state: State): CusSupportData => {
+    return {
+      name: state.name,
+      isSentSuccess: state.isSentSuccess,
+    };
+  }
 );
