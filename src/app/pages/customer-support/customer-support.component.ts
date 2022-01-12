@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { CustomerSupportService } from 'src/app/shared/services/customer-support.service';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/store';
-import {
-  sendingCustomerSupportMessage,
-  clearForm,
-} from 'src/app/store/actions/customer-support.actions';
-import * as fromSelectors from 'src/app/store/selectors/customer-support.selectors';
+import { CustomerSupportService } from 'src/app/shared/services/customer-support.service';
+import * as FromCustomerActions from '../../store/actions/customer-support.actions';
+import { AppState } from './../../store/index';
+// tslint:disable-next-line: import-spacing
+import * as CustomerSelectors from '../../store/selectors/customer-support.selectors';
 
 @Component({
   selector: 'app-customer-support',
@@ -17,25 +15,23 @@ import * as fromSelectors from 'src/app/store/selectors/customer-support.selecto
 })
 export class CustomerSupportComponent implements OnInit {
   constructor(
-    private customerSupportService: CustomerSupportService,
     private store: Store<AppState>
-  ) {}
+  ) { }
 
   isSendSuccess: boolean | null = null;
 
-  vm$: Observable<fromSelectors.CustomerSupportViewModel>;
+  cusData$: Observable<CustomerSelectors.CusSupportData>;
 
   ngOnInit(): void {
-    this.vm$ = this.store.pipe(
-      select(fromSelectors.selectCustomerSupportModel)
-    );
+    this.cusData$ = this.store.pipe(select(CustomerSelectors.customerSupportData));
   }
 
   onSubmit(f: NgForm) {
-    this.store.dispatch(sendingCustomerSupportMessage({ data: f.value }));
+    this.store.dispatch(FromCustomerActions.sendCustomerSupportMessage({ data: f.value }));
+    this.isSendSuccess = true;
   }
 
   clearFeedback() {
-    this.store.dispatch(clearForm());
+    this.store.dispatch(FromCustomerActions.clearCustomerSupportStatus());
   }
 }

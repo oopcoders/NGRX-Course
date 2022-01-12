@@ -24,12 +24,6 @@ import { environment } from '../environments/environment';
 import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { CustomerSupportEffects } from './store/effects/customer-support.effects';
-import { SpinnerEffects } from './store/effects/spinner.effects';
-import { AlertEffects } from './store/effects/alert.effects';
-import { RouteEffects } from './store/effects/route.effects';
-import { ModalEffects } from './store/effects/modal.effects';
-import { AppEffects } from './store/effects/app.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -69,17 +63,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
       },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([
-      CustomerSupportEffects,
-      SpinnerEffects,
-      AlertEffects,
-      RouteEffects,
-      ModalEffects,
-      AppEffects,
-    ]),
-    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([CustomerSupportEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

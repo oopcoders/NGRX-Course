@@ -11,9 +11,8 @@ export class CustomerSupportService {
   //  might be totally fake, and Some business logic usually handled on the server
   //   will be done on this page. This page is designed to give a back mock data.
   /********************************************************************************** */
-  constructor() {}
+  constructor() { }
 
-  //This is a fake api call
   sendMessage(form: CustomerMessage): Observable<boolean> {
     return form.name ? of(true) : of(false);
   }

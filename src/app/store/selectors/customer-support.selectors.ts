@@ -1,28 +1,23 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  State,
-  customerSupportFeatureKey,
-} from '../reducers/customer-support.reducer';
+import { customerSupportFeatureKey, State } from '../reducers/customer-support.reducer';
 
-//Get feature from store
 export const selectCustomerSupportFeature = createFeatureSelector<State>(
-  customerSupportFeatureKey
+  customerSupportFeatureKey,
 );
 
-//Return name from feature
-export const selectName = createSelector(
-  selectCustomerSupportFeature,
-  (state: State) => state.name
-);
-
-export interface CustomerSupportViewModel {
+export interface CusSupportData {
   name: string;
   isSentSuccess: boolean;
 }
 
-export const selectCustomerSupportModel = createSelector(
+// export const selectName = createSelector(
+//   selectCustomerSupportFeature,
+//   (state: State) => state.name
+// );
+
+export const customerSupportData = createSelector(
   selectCustomerSupportFeature,
-  (state: State): CustomerSupportViewModel => {
+  (state: State): CusSupportData => {
     return {
       name: state.name,
       isSentSuccess: state.isSentSuccess,

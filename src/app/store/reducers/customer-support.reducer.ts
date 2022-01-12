@@ -1,5 +1,7 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as fromSupportActions from '../actions/customer-support.actions';
+import { createReducer, on } from '@ngrx/store';
+// tslint:disable-next-line: import-spacing
+import * as FromCustomerActions from '../actions/customer-support.actions';
+
 
 export const customerSupportFeatureKey = 'customerSupport';
 
@@ -13,21 +15,22 @@ export const initialState: State = {
   isSentSuccess: null,
 };
 
+
 export const reducer = createReducer(
   initialState,
-  on(fromSupportActions.sendingCustomerSupportMessage, (state, action) => {
+  on(FromCustomerActions.sendCustomerSupportMessage, (state, action) => {
     return {
       ...state,
       name: action.data.name,
     };
   }),
-  on(fromSupportActions.sendMessageStatus, (state, action) => {
+  on(FromCustomerActions.sendCustomerSupportStatus, (state, action) => {
     return {
       ...state,
       isSentSuccess: action.isSentSuccess,
     };
   }),
-  on(fromSupportActions.clearForm, (state) => {
+  on(FromCustomerActions.clearCustomerSupportStatus, (state) => {
     return {
       ...state,
       name: null,

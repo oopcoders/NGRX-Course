@@ -1,29 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/modules/auth/resources/auth';
 
-export const loginPage = createAction(
-  '[Login Component] Login User',
-  props<{ username: string; password: string }>()
+export const loadAuths = createAction(
+  '[Auth] Load Auths'
 );
 
-export const loginModal = createAction(
-  '[Login Modal Component] Login User',
-  props<{ username: string; password: string }>()
+export const loadAuthsSuccess = createAction(
+  '[Auth] Load Auths Success',
+  props<{ data: any }>()
 );
 
-export const loginSuccess = createAction(
-  '[Auth Effect] Login User Success',
-  props<{ user: User }>()
-);
-
-export const loginFailure = createAction(
-  '[Auth Effect] Login User Failure',
+export const loadAuthsFailure = createAction(
+  '[Auth] Load Auths Failure',
   props<{ error: any }>()
-);
-
-export const logout = createAction('[Auth Links Component] Logout User');
-
-export const browserReload = createAction(
-  '[Core Component] Browser Reload',
-  props<{ user: User }>()
 );

@@ -1,16 +1,16 @@
-import { createAction, props } from '@ngrx/store';
 import { CustomerMessage } from 'src/app/shared/models/customer-message';
+import { createAction, props } from '@ngrx/store';
 
-export const sendingCustomerSupportMessage = createAction(
+export const sendCustomerSupportMessage = createAction(
   '[Customer Support Component] Sending Customer Support Message',
   props<{ data: CustomerMessage }>()
 );
 
-export const sendMessageStatus = createAction(
-  '[Customer Support Effect] Send Customer Message Status',
+export const sendCustomerSupportStatus = createAction(
+  '[Customer Support Effect] Sending Customer Support Status',
   props<{ isSentSuccess: boolean }>()
 );
 
-export const clearForm = createAction(
-  '[Customer Support Component] Clear Form'
+export const clearCustomerSupportStatus = createAction(
+  '[Customer Support Component] Clearing Customer Support Data'
 );
