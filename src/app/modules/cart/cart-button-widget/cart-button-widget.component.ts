@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from 'src/app/modules/auth/resources/auth.service';
 import { MockApiCartService } from '../resources/mock-api-cart.service';
 import { AlertService } from 'ngx-alerts';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Product, Cart } from '../resources/cart';
-import { take, map, first } from 'rxjs/operators';
 import { User } from 'src/app/modules/auth/resources/auth';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-cart-button-widget',
@@ -29,10 +29,10 @@ export class CartButtonWidgetComponent implements OnInit {
   user: User;
 
   constructor(
-    private authService: AuthService,
     private cartService: MockApiCartService,
     private alertService: AlertService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,8 @@ export class CartButtonWidgetComponent implements OnInit {
       },
       error: (err) => console.error(err),
     };
-    this.authService.user.subscribe(observer);
+
+    this.store.select((state) => state.auth.user).subscribe(observer);
 
     if (this.user.id) {
       const observer = {

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MockProductApiService } from '../resources/mock-product-api.service';
-import { AlertService } from 'ngx-alerts';
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as fromProductActions from '../state/product.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
 
 @Component({
   selector: 'app-product-edit',
@@ -13,10 +14,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ProductEditComponent implements OnInit {
   constructor(
     private service: MockProductApiService,
-    private router: Router,
     private route: ActivatedRoute,
-    private alertService: AlertService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private store: Store<AppState>
   ) {}
 
   model: any = {};
@@ -33,24 +33,8 @@ export class ProductEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.spinner.show();
-    const productObserver = {
-      next: (product) => {
-        this.router.navigate(['/shopping/product-list']),
-          console.log('success');
-
-        setTimeout(() => {
-          this.spinner.hide();
-          this.alertService.success('Product Edited');
-        }, 1000);
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.danger('Unable to edit product');
-        this.spinner.hide();
-      },
-    };
-
-    this.service.editProduct(this.model).subscribe(productObserver);
+    this.store.dispatch(
+      fromProductActions.upsertProduct({ product: this.model })
+    );
   }
 }

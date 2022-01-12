@@ -3,12 +3,12 @@
 		<div class="container">
 			<a class="navbar-brand" [routerLink]="['home']">NGRX</a>
 
-			<div class="collapse navbar-collapse" id="navbarColor01">
+			<div class="collapse navbar-collapse" id="navbarColor01" *ngIf="vm$ | async as vm">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
 						<a class="nav-link" [routerLink]="['/shopping/products']">Go Shopping</a>
 					</li>
-					<div class="btn-group" dropdown *ngIf="user.isadmin">
+					<div class="btn-group" dropdown *ngIf="vm.isAdmin">
 						<button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
 							Admin <span class="caret"></span>
 						</button>
@@ -19,14 +19,12 @@
 						</ul>
 					</div>
 				</ul>
-				<ul class="navbar-nav" *ngIf="user.id">
+				<ul class="navbar-nav" *ngIf="vm.isLoggedin">
 					<li class="nav-item">
 						<app-cart-link-widget></app-cart-link-widget>
 					</li>
 
 				</ul>
-
-
 			</div>
 		</div>
 

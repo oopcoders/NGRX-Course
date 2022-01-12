@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" *ngIf="vm$ |async as vm">
 	<div class="filter col-3  mt-4">
 		<p>Filter Products by:</p>
 		<app-price-filter-widget (selectedRadioEvent)="onPriceFilterChange($event)"></app-price-filter-widget>
@@ -8,7 +8,7 @@
 
 		<div class="row">
 
-			<div class="col-lg-4 col-md-6 mt-3" *ngFor="let product of products">
+			<div class="col-lg-4 col-md-6 mt-3" *ngFor="let product of vm.products">
 				<div class="card">
 					<img src="{{product.imageUrl}}" class="card-img-top" alt="Product Image">
 					<div class="card-body">
@@ -30,7 +30,7 @@
 		</div>
 		<div class="row">
 			<div class=" mb-1 mt-5 col-5 offset-7">
-				<app-pagination-buttons-widget [pagination]="pagination" (selecedUrl)="onPaginationChange($event);">
+				<app-pagination-buttons-widget [pagination]="vm.pagination" (selecedUrl)="onPaginationChange($event);">
 				</app-pagination-buttons-widget>
 			</div>
 		</div>

@@ -11,7 +11,7 @@ import * as AuthActions from '../actions/auth.actions';
 export class AuthEffects {
 
   loadAuths$ = createEffect(() => {
-    return this.actions$.pipe( 
+    return this.actions$.pipe(
 
       ofType(AuthActions.loadAuths),
       concatMap(() =>
@@ -25,6 +25,6 @@ export class AuthEffects {
 
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 
 }

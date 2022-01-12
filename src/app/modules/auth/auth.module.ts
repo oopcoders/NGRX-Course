@@ -9,6 +9,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AuthLinksComponent } from './auth-links/auth-links.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
 
 @NgModule({
   declarations: [LoginComponent, AuthLinksComponent],

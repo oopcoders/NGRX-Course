@@ -1,4 +1,4 @@
-<div class="product-list">
+<div class="product-list" *ngIf="vm$|async as vm">
 	<h3 class="mt-4 mb-4">Product List</h3>
 
 	<table class="table table-hover text-center">
@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 
-			<tr *ngFor="let product of products">
+			<tr *ngFor="let product of vm.products">
 				<th scope="row">{{product.name}}</th>
 				<td>${{product.price}}</td>
 				<td>{{product.quantity}}</td>
@@ -38,7 +38,7 @@
 	</table>
 	<div class="row">
 		<div class=" mb-1 mt-5 col-5 offset-7">
-			<app-pagination-buttons-widget [pagination]="pagination" (selecedUrl)="onPaginationChange($event);">
+			<app-pagination-buttons-widget [pagination]="vm.pagination" (selecedUrl)="onPaginationChange($event);">
 			</app-pagination-buttons-widget>
 		</div>
 	</div>

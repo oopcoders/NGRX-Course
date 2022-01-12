@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MockProductApiService } from './resources/mock-product-api.service';
-import { Router } from '@angular/router';
-import { AlertService } from 'ngx-alerts';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthService } from '../auth/resources/auth.service';
-import { User } from '../auth/resources/auth';
 import * as fromProductModels from '../products/resources/product';
 import { environment } from 'src/environments/environment';
 import { PaginationService } from 'src/app/shared/services/pagination.service';
-import { Pagination } from 'src/app/shared/models/pagination';
+import * as fromProductActions from './state/product.actions';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import * as ProductSelector from './state/product.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -16,20 +14,15 @@ import { Pagination } from 'src/app/shared/models/pagination';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  products: fromProductModels.Product[] = [];
-  pagination: Pagination;
-  user: User;
+  vm$: Observable<ProductSelector.ProductsViewModel>;
 
   constructor(
-    private productService: MockProductApiService,
-    public router: Router,
-    private alertService: AlertService,
-    private spinner: NgxSpinnerService,
-    private authService: AuthService,
-    private paginationService: PaginationService
+    private paginationService: PaginationService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
+    this.vm$ = this.store.pipe(select(ProductSelector.selectProductsViewModel));
     this.loadProducts(
       this.paginationService.createUrl(
         '0',
@@ -42,23 +35,11 @@ export class ProductsComponent implements OnInit {
   }
 
   loadProducts(url: string) {
-    this.spinner.show();
-    const productsObserver = {
-      next: (response) => {
-        this.products = response.result;
-        this.pagination = response.pagination;
-        setTimeout(() => {
-          this.spinner.hide();
-        }, 1000);
-      },
-      error: (err) => {
-        console.error(err);
-        this.alertService.danger('Unable to load products');
-        this.spinner.hide();
-      },
-    };
-
-    this.productService.getProducts(url).subscribe(productsObserver);
+    this.store.dispatch(
+      fromProductActions.loadProducts({
+        url: url,
+      })
+    );
   }
 
   onPriceFilterChange(item: fromProductModels.PriceFilter) {

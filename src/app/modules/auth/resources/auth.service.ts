@@ -15,11 +15,6 @@ export class AuthService {
   /********************************************************************************** */
   baseUrl: string = 'http://localhost:3000/users/';
 
-  private userSource = new BehaviorSubject<fromAuthModels.User>(
-    fromAuthModels.UserModel
-  );
-  user = this.userSource.asObservable();
-
   constructor(private http: HttpClient) {}
   //Fake Login API
   login(username: string, password: string): Observable<any> {
@@ -27,16 +22,11 @@ export class AuthService {
       switchMap((users) => {
         let user = users[0];
         if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
           return of(user);
         } else {
           return throwError('Unable to login');
         }
       })
     );
-  }
-
-  updatedUserSelection(user: fromAuthModels.User) {
-    this.userSource.next(user);
   }
 }

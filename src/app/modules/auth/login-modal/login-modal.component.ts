@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../resources/auth.service';
 import { NgForm } from '@angular/forms';
-import { MockApiCartService } from '../../cart/resources/mock-api-cart.service';
+import { AuthService } from '../resources/auth.service';
 import { User } from '../resources/auth';
+import { Observable } from 'rxjs';
+import { MockApiCartService } from '../../cart/resources/mock-api-cart.service';
+import { ModalService } from '../resources/modal.service';
 import * as fromAuthActions from 'src/app/store/actions/auth.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-login-modal',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['./login-modal.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginModalComponent implements OnInit {
+  user: User;
+  user$: Observable<User>;
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private cartService: MockApiCartService,
+    private modalService: ModalService,
     private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {}
-
-  user: User;
 
   updateShoppingCart(userid) {
     const observer = {
@@ -35,10 +38,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.store.dispatch(
-      fromAuthActions.loginPage({
+      fromAuthActions.loginModal({
         username: f.value.username,
         password: f.value.password,
       })
     );
+  }
+
+  cancel(): void {
+    this.modalService.hide();
   }
 }

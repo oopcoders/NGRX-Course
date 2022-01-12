@@ -21,8 +21,8 @@ export class MockProductApiService {
 
   baseUrl: string = 'http://localhost:3000/';
 
-  createProduct(model: Product) {
-    return this.http.post(this.baseUrl + 'products', model);
+  createProduct(model: Product): Observable<Product> {
+    return this.http.post<Product>(this.baseUrl + 'products', model);
   }
 
   getProducts(url: string): Observable<PaginatedResult<Product[]>> {
@@ -56,7 +56,7 @@ export class MockProductApiService {
     return this.http.put<Product>(this.baseUrl + 'products/' + model.id, model);
   }
 
-  deleteProduct(productId: number) {
+  deleteProduct(productId: string) {
     return this.http.delete(this.baseUrl + 'products/' + productId);
   }
 }

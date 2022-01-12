@@ -56,6 +56,10 @@ import { CustomerSupportEffects } from './store/effects/customer-support.effects
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
       },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

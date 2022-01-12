@@ -12,6 +12,10 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import * as fromProduct from './state/product.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './state/product.effects';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ProductsRoutingModule,
     FormsModule,
     CartModule,
+    StoreModule.forFeature(fromProduct.productsFeatureKey, fromProduct.reducer),
+    EffectsModule.forFeature([ProductEffects]),
   ],
 })
 export class ProductsModule {}
